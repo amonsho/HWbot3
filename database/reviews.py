@@ -14,10 +14,10 @@ class Review:
         """,user_id, book_id, review_text)
         except Exception as e:
             print('Error from add review',e)
-
-    async def get_user_review(self,user_id:int):
+    @staticmethod
+    async def get_user_review(db:DatabaseConfig,user_id:int):
         try:
-            async with self.db.pool.acquire() as conn:
+            async with db.pool.acquire() as conn:
                 review = await conn.fetch("""
             SELECT r.id, b.title, r.review_text, r.created_at FROM reviews r
             JOIN books b ON r.book_id = b.id

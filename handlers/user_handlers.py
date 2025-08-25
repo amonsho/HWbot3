@@ -88,7 +88,7 @@ async def my_reviews(msg: Message):
         return
 
 
-    reviews = await Review.get_user_review(user_id=user_row["id"])
+    reviews = await Review.get_user_review(db,user_id=user_row["id"])
     if not reviews:
         await msg.answer("❌ У вас нет отзывов.")
         return
